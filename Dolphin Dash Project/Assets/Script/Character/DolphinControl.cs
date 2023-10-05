@@ -7,16 +7,13 @@ public class DolphinControl : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    private int CoinCount = 0;
     [SerializeField] private TextMeshProUGUI CoinDisplay;
-    private bool Highestpnt;
     private Animator anim;
 
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Highestpnt = false;
         anim = GetComponent<Animator>();
     }
 
@@ -28,20 +25,9 @@ public class DolphinControl : MonoBehaviour
             Debug.Log("In Water");
              
         }
-            
-        
-        if (collision.gameObject.CompareTag("Collectible"))
-        {
-            //Destroy(collision.gameObject);
-            CoinCount++;
-        }
     }
 
-    private void Update()
-    {
-        CoinDisplay.text = CoinCount.ToString();
 
-    }
 
     private void FixedUpdate()
     {
