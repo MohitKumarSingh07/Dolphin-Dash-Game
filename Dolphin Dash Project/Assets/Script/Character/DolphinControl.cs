@@ -12,18 +12,16 @@ public class DolphinControl : MonoBehaviour
     private bool Highestpnt;
     private Animator anim;
     private bool m_isInWater;
-
-    [Header("InWater Check Variables")]
-    [SerializeField] private float GizmosRadius;
-    [SerializeField] private float BoxCastSize;
-
-
+    [SerializeField] private CapsuleCollider2D m_CapsuleCollider2D;
+    [SerializeField] private LayerMask SeaLayer;
+    private RaycastHit2D raycastHit;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Highestpnt = false;
         anim = GetComponent<Animator>();
+        //m_CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
     }
 
 
@@ -57,10 +55,10 @@ public class DolphinControl : MonoBehaviour
         }
     }
 
-    private void InWaterCheck()
+    private bool InWaterCheck()
     {
-        Vector3 SpherePosition = this.transform.position;
-
+        raycastHit = Physics2D.CapsuleCast(m_CapsuleCollider2D.bounds.center, m_CapsuleCollider2D.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.2f, SeaLayer);
+        return raycastHit.collider != null;
     }
 
 
@@ -69,7 +67,7 @@ public class DolphinControl : MonoBehaviour
         Color TransparentRed = new Color(1, 0, 0, .5f);
         Color TransparentGreen = new Color(0, 1, 0, .5f);
 
-        if (m_isInWater)
+        if (InWaterCheck())
         {
             Gizmos.color = TransparentGreen;
         }
@@ -78,6 +76,6 @@ public class DolphinControl : MonoBehaviour
             Gizmos.color = TransparentRed;
         }
 
-        Gizmos.DrawSphere(this.transform.position, GizmosRadius);
+        Gizmos.DrawSphere(this.transform.position, 1f);
     }
 }

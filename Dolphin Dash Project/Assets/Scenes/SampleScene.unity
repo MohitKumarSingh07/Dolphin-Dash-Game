@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4319869}
   - component: {fileID: 4319870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 273386839}
   - component: {fileID: 273386840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -614,7 +614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415527919}
   - component: {fileID: 415527920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,6 +1108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   CoinDisplay: {fileID: 1414415464677528009}
+  m_CapsuleCollider2D: {fileID: 533770934}
+  SeaLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &533770933
 Rigidbody2D:
   serializedVersion: 4
@@ -5991,9 +5995,9 @@ GameObject:
   - component: {fileID: 650177558}
   - component: {fileID: 650177560}
   - component: {fileID: 650177561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves
-  m_TagString: Untagged
+  m_TagString: Sea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6152,7 +6156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719963788}
   - component: {fileID: 719963789}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6236,7 +6240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735104443}
   - component: {fileID: 735104444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: SeaBottom
   m_Icon: {fileID: 0}
@@ -6646,7 +6650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036082172}
   - component: {fileID: 1036082173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6730,7 +6734,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077149965}
   - component: {fileID: 1077149966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7016,7 +7020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384125164}
   - component: {fileID: 1384125165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7105,7 +7109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570570543}
   - component: {fileID: 1570570544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7273,7 +7277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685629282}
   - component: {fileID: 1685629283}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7357,7 +7361,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719977521}
   - component: {fileID: 1719977522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7541,7 +7545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074429733}
   - component: {fileID: 2074429734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7625,7 +7629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077513372}
   - component: {fileID: 2077513373}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
