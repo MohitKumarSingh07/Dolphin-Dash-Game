@@ -11,6 +11,12 @@ public class DolphinControl : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CoinDisplay;
     private bool Highestpnt;
     private Animator anim;
+    private bool m_isInWater;
+
+    [Header("InWater Check Variables")]
+    [SerializeField] private float GizmosRadius;
+    [SerializeField] private float BoxCastSize;
+
 
 
     private void Start()
@@ -53,12 +59,25 @@ public class DolphinControl : MonoBehaviour
 
     private void InWaterCheck()
     {
+        Vector3 SpherePosition = this.transform.position;
 
     }
 
 
     private void OnDrawGizmosSelected()
     {
-        
+        Color TransparentRed = new Color(1, 0, 0, .5f);
+        Color TransparentGreen = new Color(0, 1, 0, .5f);
+
+        if (m_isInWater)
+        {
+            Gizmos.color = TransparentGreen;
+        }
+        else
+        {
+            Gizmos.color = TransparentRed;
+        }
+
+        Gizmos.DrawSphere(this.transform.position, GizmosRadius);
     }
 }
