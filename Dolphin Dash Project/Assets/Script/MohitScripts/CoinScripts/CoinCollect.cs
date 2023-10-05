@@ -15,6 +15,7 @@ public class CoinCollect : MonoBehaviour
         if (collision.CompareTag("Dolphin"))
         {
             gameObject.GetComponent<Collider2D>().enabled = false;
+            GameManager.manager.AddPoints(1);
             isCollected = true;
             Destroy(gameObject, 0.7f);
         }
