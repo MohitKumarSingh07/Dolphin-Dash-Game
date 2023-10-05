@@ -7,7 +7,6 @@ public class DolphinControl : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    [SerializeField] private TextMeshProUGUI CoinDisplay;
     private Animator anim;
 
 

@@ -55,12 +55,30 @@ public static class PlayerPrefManager
 		PlayerPrefs.SetInt("Highscore",highscore);
 	}
 
+    public static int GetPowerUps()
+    {
+        if (PlayerPrefs.HasKey("Power"))
+        {
+            return PlayerPrefs.GetInt("Power");
+        }
+        else
+        {
+            return 0;
+        }
+    }
 
-	public static void SavePlayerState(int score, int highScore, int lives) 
+    public static void SetPowerUps(int powerUps)
+    {
+        PlayerPrefs.SetInt("Power", powerUps);
+    }
+
+
+    public static void SavePlayerState(int score, int highScore, int lives, int powerUps) 
 	{
 		PlayerPrefs.SetInt("Score",score);
 		PlayerPrefs.SetInt("Lives",lives);
 		PlayerPrefs.SetInt("Highscore",highScore);
+		PlayerPrefs.SetInt("Power",powerUps);
 	}
 	
 	public static void ResetPlayerState(int startLives, bool resetHighscore) 
@@ -88,7 +106,7 @@ public static class PlayerPrefManager
 	// output the defined Player Prefs to the console
 	public static void ShowPlayerPrefs() 
 	{
-		string[] values = {"Score","Highscore","Lives"};
+		string[] values = {"Score","Highscore","Lives","Power"};
 
 		foreach(string value in values) 
 		{

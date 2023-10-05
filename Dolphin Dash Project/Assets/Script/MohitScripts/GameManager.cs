@@ -16,16 +16,15 @@ public class GameManager : MonoBehaviour
 	public int startLives = 3;
 	public int lives = 3;
 
-	public TMP_Text UIScore;
-	public TMP_Text UIHighScore;
-	public TMP_Text powerUps;
-	//public TMP_Text UILevel;
+	public TMP_Text ScoreText;
+	public TMP_Text HighScoreText;
+	public TMP_Text powerUpsText;
 
 	public GameObject[] UIExtraLives;
 	public GameObject UIGamePaused;
-	private GameObject _player;
+	private GameObject player;
 
-	private Vector3 _spawnLocation;
+	private Vector3 spawnLocation;
 
 	private void Awake()
 	{
@@ -45,33 +44,9 @@ public class GameManager : MonoBehaviour
 
 	private void setupDefaults()
 	{ 
-		_player = GameObject.FindGameObjectWithTag("Dolphin");
+		player = GameObject.FindGameObjectWithTag("Dolphin");
 
-        _spawnLocation = _player.transform.position;
-
-		if (levelAfterVictory=="") 
-		{
-			Debug.LogWarning("levelAfterVictory not specified, defaulted to current level");
-		    levelAfterVictory = SceneManager.GetActiveScene().name;
-		}
-		
-		if (levelAfterGameOver=="") 
-		{
-			Debug.LogWarning("levelAfterGameOver not specified, defaulted to current level");
-			levelAfterGameOver = SceneManager.GetActiveScene().name;
-        }
-
-		if (UIScore==null)
-			Debug.LogError ("Need to set UIScore on Game Manager.");
-		
-		if (UIHighScore==null)
-			Debug.LogError ("Need to set UIHighScore on Game Manager.");
-		
-		//if (UILevel==null)
-		//	Debug.LogError ("Need to set UILevel on Game Manager.");
-		
-		if (UIGamePaused==null)
-			Debug.LogError ("Need to set UIGamePaused on Game Manager.");
+        spawnLocation = player.transform.position;
 		
 		refreshPlayerState();
 
@@ -87,7 +62,7 @@ public class GameManager : MonoBehaviour
 
 			lives = PlayerPrefManager.GetLives();
 		}
-
+		powerUp = PlayerPrefManager.GetPowerUps();
 		score = PlayerPrefManager.GetScore();
 		highscore = PlayerPrefManager.GetHighscore();
 
@@ -96,9 +71,8 @@ public class GameManager : MonoBehaviour
 
 	private void refreshGUI() 
 	{
-		UIScore.text = score.ToString();
-		UIHighScore.text = highscore.ToString ();
-		//UILevel.text = SceneManager.GetActiveScene().name;
+		ScoreText.text = score.ToString();
+		HighScoreText.text = highscore.ToString ();
 
         for (int i = 0; i < UIExtraLives.Length; i++) 
 		{
@@ -115,17 +89,23 @@ public class GameManager : MonoBehaviour
 
 	public void AddPoints(int amount)
 	{
-		score = score + amount;
+		score += amount;
 
-		UIScore.text = score.ToString();
+		ScoreText.text = score.ToString();
 
 		if (score > highscore)
 		{
 			highscore = score;
-			UIHighScore.text = score.ToString();
+			HighScoreText.text = score.ToString();
 		}
 	}
-	public void ResetGame() 
+    public void AddPowerUps(int amount)
+    {
+        powerUp += amount;
+
+        powerUpsText.text = powerUp.ToString();
+    }
+    public void ResetGame() 
 	{
 		lives--;
 
@@ -133,7 +113,7 @@ public class GameManager : MonoBehaviour
 
 		if (lives <= 0) 
 		{
-			PlayerPrefManager.SavePlayerState(score,highscore,lives);
+			PlayerPrefManager.SavePlayerState(score,highscore,lives,powerUp);
 
 			SceneManager.LoadScene(levelAfterGameOver);
 		} 
@@ -145,7 +125,7 @@ public class GameManager : MonoBehaviour
 
 	public void LevelCompete() 
 	{
-		PlayerPrefManager.SavePlayerState(score,highscore,lives);
+		PlayerPrefManager.SavePlayerState(score,highscore,lives, powerUp);
 		StartCoroutine(LoadNextLevel());
 	}
 
