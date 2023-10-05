@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4319869}
   - component: {fileID: 4319870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 273386839}
   - component: {fileID: 273386840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -808,7 +808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 415527919}
   - component: {fileID: 415527920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1300,8 +1300,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8369e9df352744e97866705c310a5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  CoinDisplay: {fileID: 0}
+  speed: 8
+  m_CapsuleCollider2D: {fileID: 533770934}
+  SeaLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  particles: {fileID: 0}
+  m_GizmosSphereRadius: 0.7
 --- !u!50 &533770933
 Rigidbody2D:
   serializedVersion: 4
@@ -6185,7 +6190,7 @@ GameObject:
   - component: {fileID: 650177558}
   - component: {fileID: 650177560}
   - component: {fileID: 650177561}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6319,10 +6324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e0e1fb247fc814f972f6d2c019e8d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 533770938}
   InWater: 0
   CharAnim: {fileID: 533770939}
   Vcam: {fileID: 1379540983}
+  dolphin: {fileID: 0}
 --- !u!114 &650177561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6336,6 +6341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParallaxSpeedX: 0
+  ParallaxSpeedY: 0
 --- !u!1 &719963787
 GameObject:
   m_ObjectHideFlags: 0
@@ -6346,7 +6352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 719963788}
   - component: {fileID: 719963789}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6430,7 +6436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735104443}
   - component: {fileID: 735104444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bottom
   m_TagString: SeaBottom
   m_Icon: {fileID: 0}
@@ -6505,7 +6511,7 @@ Transform:
   m_GameObject: {fileID: 742763838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.825, y: 2.85, z: 1}
+  m_LocalScale: {x: 2.15, y: 4.58, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 749801727}
@@ -6577,7 +6583,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a559750b1532a84faddb74dde043f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParallaxSpeedX: 0.4
+  ParallaxSpeedX: 0.5
+  ParallaxSpeedY: 0
 --- !u!1 &749801726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6840,7 +6847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036082172}
   - component: {fileID: 1036082173}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6924,7 +6931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077149965}
   - component: {fileID: 1077149966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7025,7 +7032,7 @@ Transform:
   m_GameObject: {fileID: 1164448190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.77, z: 0}
-  m_LocalScale: {x: 1.825, y: 4, z: 1}
+  m_LocalScale: {x: 2.09, y: 8.56, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 128366041}
@@ -7045,7 +7052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a559750b1532a84faddb74dde043f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParallaxSpeedX: 0.1
+  ParallaxSpeedX: 0.2
+  ParallaxSpeedY: 0.3
 --- !u!212 &1164448193
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7210,7 +7218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1384125164}
   - component: {fileID: 1384125165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7299,7 +7307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570570543}
   - component: {fileID: 1570570544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7467,7 +7475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685629282}
   - component: {fileID: 1685629283}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7551,7 +7559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719977521}
   - component: {fileID: 1719977522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7652,7 +7660,7 @@ Transform:
   m_GameObject: {fileID: 1751829165}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.5, z: 0}
-  m_LocalScale: {x: 1.825, y: 2.85, z: 1}
+  m_LocalScale: {x: 2.23, y: 6.88, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1017246450}
@@ -7672,7 +7680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a559750b1532a84faddb74dde043f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParallaxSpeedX: 0.2
+  ParallaxSpeedX: 0.3
+  ParallaxSpeedY: 0.15
 --- !u!212 &1751829168
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7735,7 +7744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074429733}
   - component: {fileID: 2074429734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7819,7 +7828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077513372}
   - component: {fileID: 2077513373}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Waves (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
