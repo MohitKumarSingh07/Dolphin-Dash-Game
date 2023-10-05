@@ -9,7 +9,7 @@ public class DolphinControl : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float speed;
-    private Animator Anim;
+    private Animator anim;
     [SerializeField] private CapsuleCollider2D m_CapsuleCollider2D;
     [SerializeField] private LayerMask SeaLayer;
     private RaycastHit2D raycastHit;
@@ -21,7 +21,7 @@ public class DolphinControl : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         particles = GetComponent<ParticleSystem>();
     }
 
@@ -46,8 +46,8 @@ public class DolphinControl : MonoBehaviour
             particles.Emit(0);
         }
 
-        Anim.SetBool("DiveIn", SEA.DiveIn);
-        Anim.SetBool("DiveOut", SEA.DiveOut);
+        anim.SetBool("DiveIn", SEA.DiveIn);
+        anim.SetBool("DiveOut", SEA.DiveOut);
     }
 
     private void FixedUpdate()
