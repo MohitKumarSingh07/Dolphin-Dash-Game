@@ -10,6 +10,7 @@ public class PowerUps : MonoBehaviour
     private Transform storeLocation;
     [SerializeField] private Vector3 offset;
 
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Dolphin"))

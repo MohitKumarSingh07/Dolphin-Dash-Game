@@ -7,17 +7,16 @@ using UnityEngine;
 public class SEA : MonoBehaviour
 {
     private BuoyancyEffector2D sea;
-    [SerializeField] private ParticleSystem particles;
     [SerializeField] private bool InWater;
     [SerializeField] private Animator CharAnim;
-    private bool DiveIn;
-    private bool DiveOut;
+    public static bool DiveIn;
+    public static bool DiveOut;
     [SerializeField] private CinemachineVirtualCamera Vcam;
+    [SerializeField] private DolphinControl dolphin;
 
     private void Start()
     {
-        sea = GetComponentInChildren<BuoyancyEffector2D>();
-        particles = GameObject.FindGameObjectWithTag("Dolphin").GetComponent<ParticleSystem>();
+        sea = GetComponent<BuoyancyEffector2D>();
         DiveIn = false;
     }
 
@@ -43,17 +42,6 @@ public class SEA : MonoBehaviour
             DiveOut = true;
         }
 
-        if (InWater)
-        {
-            particles.Emit(1);
-        }
-        else
-        {
-            particles.Emit(0);
-        }
-        CharAnim.SetBool("DiveIn", DiveIn);
-        CharAnim.SetBool("DiveOut", DiveOut);
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -74,7 +62,6 @@ public class SEA : MonoBehaviour
             InWater = false;
             this.GetComponentInChildren<BuoyancyEffector2D>().linearDrag = 25;
             //this.GetComponentInChildren<BuoyancyEffector2D>().density = 5;
-            Debug.Log("In water");
         }
     }
 }
