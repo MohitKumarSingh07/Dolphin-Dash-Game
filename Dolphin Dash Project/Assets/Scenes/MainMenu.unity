@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: Gameplay
   reset: 0
-  startLives: 3
+  startLives: 2
 --- !u!1 &7112216602058430789
 GameObject:
   m_ObjectHideFlags: 0
