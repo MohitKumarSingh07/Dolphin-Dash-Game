@@ -10,21 +10,22 @@ public class GameManager : MonoBehaviour
 	public string levelAfterVictory;
 	public string levelAfterGameOver;
 
+	public int coin = 0;
+
 	public int score = 0;
-	public int highscore = 0;
+	public int distance = 0;
 	public int powerUp = 0;
+
 	public int startLives = 3;
 	public int lives = 3;
 
-	public TMP_Text ScoreText;
-	public TMP_Text HighScoreText;
+    public TMP_Text scoreText;
+	public TMP_Text distanceText;
 	public TMP_Text powerUpsText;
 
 	public GameObject[] UIExtraLives;
 	public GameObject UIGamePaused;
 	private GameObject player;
-
-	private Vector3 spawnLocation;
 
 	private void Awake()
 	{
@@ -35,18 +36,15 @@ public class GameManager : MonoBehaviour
 
 		setupDefaults();
 	}
-
-	private void Update()
-	{
-
-	}
-   
-
-	private void setupDefaults()
+    private void Update()
+    {
+		distance = (int)player.transform.position.x;
+		distanceText.text = distance.ToString ();
+    }
+    private void setupDefaults()
 	{ 
 		player = GameObject.FindGameObjectWithTag("Dolphin");
 
-        spawnLocation = player.transform.position;
 		
 		refreshPlayerState();
 
@@ -64,15 +62,14 @@ public class GameManager : MonoBehaviour
 		}
 		powerUp = PlayerPrefManager.GetPowerUps();
 		score = PlayerPrefManager.GetScore();
-		highscore = PlayerPrefManager.GetHighscore();
+		distance = PlayerPrefManager.GetHighscore();
 
 		PlayerPrefManager.UnlockLevel();
 	}
 
 	private void refreshGUI() 
 	{
-		ScoreText.text = score.ToString();
-		HighScoreText.text = highscore.ToString ();
+		scoreText.text = score.ToString();
 
         for (int i = 0; i < UIExtraLives.Length; i++) 
 		{
@@ -90,14 +87,15 @@ public class GameManager : MonoBehaviour
 	public void AddPoints(int amount)
 	{
 		score += amount;
+		coin += amount;
 
-		ScoreText.text = score.ToString();
+		scoreText.text = score.ToString();
 
-		if (score > highscore)
-		{
-			highscore = score;
-			HighScoreText.text = score.ToString();
-		}
+		//if (score > highscore)
+		//{
+		//	highscore = score;
+		//	HighScoreText.text = score.ToString();
+		//}
 	}
     public void AddPowerUps(int amount)
     {
@@ -113,8 +111,7 @@ public class GameManager : MonoBehaviour
 
 		if (lives <= 0) 
 		{
-			PlayerPrefManager.SavePlayerState(score,highscore,lives,powerUp);
-
+			PlayerPrefManager.SavePlayerState(score,distance,lives,powerUp);
 			SceneManager.LoadScene(levelAfterGameOver);
 		} 
 		else 
@@ -125,7 +122,7 @@ public class GameManager : MonoBehaviour
 
 	public void LevelCompete() 
 	{
-		PlayerPrefManager.SavePlayerState(score,highscore,lives, powerUp);
+		PlayerPrefManager.SavePlayerState(score, distance, lives, powerUp);
 		StartCoroutine(LoadNextLevel());
 	}
 
@@ -145,4 +142,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         UIGamePaused.SetActive(false);
     }
+	public void Mainmenu()
+	{
+		SceneManager.LoadScene(levelAfterGameOver);
+	}
 }
