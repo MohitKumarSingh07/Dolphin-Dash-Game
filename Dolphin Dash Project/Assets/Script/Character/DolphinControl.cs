@@ -4,6 +4,7 @@ using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class DolphinControl : MonoBehaviour
 {
@@ -18,16 +19,18 @@ public class DolphinControl : MonoBehaviour
     public static bool DiveIn;
     public static bool DiveOut;
     public static bool AtBottom;
+    public static bool DiveTrigger;
+    private float tempDive;
 
     [Header("Dash Settings")]
     [SerializeField] private bool canDash;
     [SerializeField] private float DashMultiplier;
     [SerializeField] private float DashTime;
-    [SerializeField] private TrailRenderer TrailRend;
     [SerializeField] private float DashCoolDownTime;
+    private TrailRenderer TrailRend;
 
 
-    [Header("Gizmos Param")]
+     [Header("Gizmos Param")]
     [SerializeField] private float m_GizmosSphereRadius;
 
     private void Start()
@@ -40,7 +43,7 @@ public class DolphinControl : MonoBehaviour
         DiveOut = false;
         AtBottom = false;
         canDash = true;
-        DashMultiplier = 2f;
+        //DashMultiplier = 2f;
         DashTime = .3f;
         DashCoolDownTime = 1f;
     }
@@ -83,10 +86,32 @@ public class DolphinControl : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        //if(InWaterCheck() && rb.velocity.y == 0)
+        //if (InWaterCheck() && this.transform.position.y < 0)
         //{
-        //    SEA.DiveOut = false;
-        //    SEA.DiveIn = false;
+        //    DiveOut = false;
+        //    DiveIn = false;
+        //}
+
+        //if (DiveTrigger == true)
+        //{
+        //    tempDive += .2f * Time.deltaTime;
+        //    anim.SetFloat("DiveIn", tempDive);
+        //}
+        
+        ////if(DiveTrigger == false)
+        ////{
+        ////    tempDive -= .02f * Time.deltaTime;
+        ////    anim.SetFloat("DiveOut", tempDive);
+        ////}
+
+        //if(tempDive < 0)
+        //{
+        //    tempDive = 0;
+        //}
+        
+        //if(tempDive > 1)
+        //{
+        //    tempDive = 1;
         //}
 
         anim.SetBool("DiveIn", DiveIn);
@@ -96,10 +121,23 @@ public class DolphinControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         rb.velocity = new Vector2(speed, rb.velocity.y);
-
-
+    }
+    
+    IEnumerator Dash()
+    {
+        canDash = false;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        float originalspeed = speed;
+        TrailRend.emitting = true;
+        speed *= DashMultiplier;
+        yield return new WaitForSeconds(DashTime);
+        TrailRend.emitting = false;
+        rb.gravityScale = originalGravity;
+        speed = originalspeed;
+        yield return new WaitForSeconds(DashCoolDownTime);
+        canDash = true;
     }
 
     public bool InWaterCheck()
@@ -125,21 +163,5 @@ public class DolphinControl : MonoBehaviour
         }
 
         Gizmos.DrawSphere(this.transform.position, m_GizmosSphereRadius);
-    }
-
-    IEnumerator Dash()
-    {
-        canDash = false;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0;
-        float originalspeed = speed;
-        TrailRend.emitting = true;
-        speed *= DashMultiplier;
-        yield return new WaitForSeconds(DashTime);
-        TrailRend.emitting = false;
-        rb.gravityScale = originalGravity;
-        speed = originalspeed;
-        yield return new WaitForSeconds(DashCoolDownTime);
-        canDash = true;
     }
 }
