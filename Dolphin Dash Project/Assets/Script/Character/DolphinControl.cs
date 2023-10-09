@@ -14,6 +14,18 @@ public class DolphinControl : MonoBehaviour
     [SerializeField] private LayerMask SeaLayer;
     private RaycastHit2D raycastHit;
     [SerializeField] private ParticleSystem particles;
+    public static bool InWater;
+    public static bool DiveIn;
+    public static bool DiveOut;
+    public static bool AtBottom;
+
+    [Header("Dash Settings")]
+    [SerializeField] private bool canDash;
+    [SerializeField] private float DashMultiplier;
+    [SerializeField] private float DashTime;
+    [SerializeField] private TrailRenderer TrailRend;
+    [SerializeField] private float DashCoolDownTime;
+
 
     [Header("Gizmos Param")]
     [SerializeField] private float m_GizmosSphereRadius;
@@ -23,6 +35,14 @@ public class DolphinControl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         particles = GetComponent<ParticleSystem>();
+        TrailRend = GetComponent<TrailRenderer>();
+        DiveIn = false;
+        DiveOut = false;
+        AtBottom = false;
+        canDash = true;
+        DashMultiplier = 2f;
+        DashTime = .3f;
+        DashCoolDownTime = 1f;
     }
 
 
@@ -35,33 +55,58 @@ public class DolphinControl : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
         if (InWaterCheck())
+        {
+            InWater = true;
+        }
+        else
+        {
+            InWater = false;
+        }
+
+        if (InWater)
         {
             particles.Emit(1);
         }
         else
         {
             particles.Emit(0);
+            DiveIn = false;
+            DiveOut = false;
         }
 
-        anim.SetBool("DiveIn", SEA.DiveIn);
-        anim.SetBool("DiveOut", SEA.DiveOut);
+        if (Input.GetKeyDown(KeyCode.Space) && canDash)
+        {
+            StartCoroutine(Dash());
+        }
+
+        //if(InWaterCheck() && rb.velocity.y == 0)
+        //{
+        //    SEA.DiveOut = false;
+        //    SEA.DiveIn = false;
+        //}
+
+        anim.SetBool("DiveIn", DiveIn);
+        anim.SetBool("DiveOut", DiveOut);
+
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rb.velocity = new Vector2(speed, rb.velocity.y);
-        }
+
+        rb.velocity = new Vector2(speed, rb.velocity.y);
+
+
     }
 
     public bool InWaterCheck()
     {
         raycastHit = Physics2D.CapsuleCast(m_CapsuleCollider2D.bounds.center, m_CapsuleCollider2D.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.2f, SeaLayer);
         return raycastHit.collider != null;
+
     }
 
 
@@ -70,7 +115,7 @@ public class DolphinControl : MonoBehaviour
         Color TransparentRed = new Color(1, 0, 0, .5f);
         Color TransparentGreen = new Color(0, 1, 0, .5f);
 
-        if (InWaterCheck())
+        if (InWater)
         {
             Gizmos.color = TransparentGreen;
         }
@@ -80,5 +125,21 @@ public class DolphinControl : MonoBehaviour
         }
 
         Gizmos.DrawSphere(this.transform.position, m_GizmosSphereRadius);
+    }
+
+    IEnumerator Dash()
+    {
+        canDash = false;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        float originalspeed = speed;
+        TrailRend.emitting = true;
+        speed *= DashMultiplier;
+        yield return new WaitForSeconds(DashTime);
+        TrailRend.emitting = false;
+        rb.gravityScale = originalGravity;
+        speed = originalspeed;
+        yield return new WaitForSeconds(DashCoolDownTime);
+        canDash = true;
     }
 }

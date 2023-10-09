@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Linq.Expressions;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Spawner : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnPowerUp());
 
     }
+
+
     IEnumerator SpawnCoin()
     {
         for(int i =0; i<= spwanCount; i++)
