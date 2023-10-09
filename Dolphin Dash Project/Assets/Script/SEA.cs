@@ -28,12 +28,16 @@ public class SEA : MonoBehaviour
                 DolphinControl.DiveOut = false;
             }
 
+            //DolphinControl.DiveTrigger = true;
+
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             sea.density = 3;
             DolphinControl.DiveIn = false;
             DolphinControl.DiveOut = true;
+
+            //DolphinControl.DiveTrigger = false;
         }
 
     }

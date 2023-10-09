@@ -18,7 +18,19 @@ public class Breathing : MonoBehaviour
 
     private void Update()
     {
-        if (DolphinControl.InWater)
+        OxygenControl();
+
+        if(CurrentOxygenLevel <= 0)
+        {
+            CurrentOxygenLevel = 0;
+        }
+
+        OxygenMeter.value = CurrentOxygenLevel / 10;
+    }
+
+    private void OxygenControl()
+    {
+        if (DolphinControl.InWater && this.transform.position.y < -2f)
         {
             CurrentOxygenLevel -= Time.deltaTime * DepletionRate;
         }
@@ -29,12 +41,5 @@ public class Breathing : MonoBehaviour
                 CurrentOxygenLevel += Time.deltaTime * ReplenishRate;
             }
         }
-
-        if(CurrentOxygenLevel <= 0)
-        {
-            CurrentOxygenLevel = 0;
-        }
-
-        OxygenMeter.value = CurrentOxygenLevel / 10;
     }
 }
