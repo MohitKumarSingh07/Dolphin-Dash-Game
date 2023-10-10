@@ -19,8 +19,6 @@ public class DolphinControl : MonoBehaviour
     public static bool DiveIn;
     public static bool DiveOut;
     public static bool AtBottom;
-    public static bool DiveTrigger;
-    private float tempDive;
 
     [Header("Dash Settings")]
     [SerializeField] private bool canDash;
@@ -28,6 +26,7 @@ public class DolphinControl : MonoBehaviour
     [SerializeField] private float DashTime;
     [SerializeField] private float DashCoolDownTime;
     private TrailRenderer TrailRend;
+    public static bool isDashing;
 
 
      [Header("Gizmos Param")]
@@ -43,21 +42,32 @@ public class DolphinControl : MonoBehaviour
         DiveOut = false;
         AtBottom = false;
         canDash = true;
+        isDashing = false;
         //DashMultiplier = 2f;
         DashTime = .3f;
         DashCoolDownTime = 1f;
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Sea"))
-        {
-            Debug.Log("In Water");
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("SeaBottom"))
+    //    {
+    //        DiveIn = false;
+    //        DiveOut = false;
+    //    }
 
-        }
-    }
+    //}
 
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("SeaBottom"))
+    //    {
+    //        DiveIn = false;
+    //        DiveOut = false;
+    //    }
+    //}
 
     private void Update()
     {
@@ -86,34 +96,6 @@ public class DolphinControl : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        //if (InWaterCheck() && this.transform.position.y < 0)
-        //{
-        //    DiveOut = false;
-        //    DiveIn = false;
-        //}
-
-        //if (DiveTrigger == true)
-        //{
-        //    tempDive += .2f * Time.deltaTime;
-        //    anim.SetFloat("DiveIn", tempDive);
-        //}
-        
-        ////if(DiveTrigger == false)
-        ////{
-        ////    tempDive -= .02f * Time.deltaTime;
-        ////    anim.SetFloat("DiveOut", tempDive);
-        ////}
-
-        //if(tempDive < 0)
-        //{
-        //    tempDive = 0;
-        //}
-        
-        //if(tempDive > 1)
-        //{
-        //    tempDive = 1;
-        //}
-
         anim.SetBool("DiveIn", DiveIn);
         anim.SetBool("DiveOut", DiveOut);
 
@@ -127,12 +109,14 @@ public class DolphinControl : MonoBehaviour
     IEnumerator Dash()
     {
         canDash = false;
+        isDashing = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0;
         float originalspeed = speed;
         TrailRend.emitting = true;
         speed *= DashMultiplier;
         yield return new WaitForSeconds(DashTime);
+        isDashing = false;
         TrailRend.emitting = false;
         rb.gravityScale = originalGravity;
         speed = originalspeed;

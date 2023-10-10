@@ -18,26 +18,28 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         m_Vcam = GetComponent<CinemachineVirtualCamera>();
-        m_Vcam.m_Lens.OrthographicSize = FOVSize;
+        //m_Vcam.m_Lens.OrthographicSize = FOVSize;
 
         
     }
 
     private void Update()
     {
-        //Camera.main.transform.position = new Vector3(m_Character.position.x, transform.position.y, transform.position.z);
-        Mathf.Clamp(FOVSize, 4, 6);
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            FOVSize -= Time.deltaTime;
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            //CameraPan(MinOrthoSize, MaxOrthoSize);
-            FOVSize = 6;
-        }
+        
 
-        m_Vcam.m_Lens.OrthographicSize = FOVSize;
+        //Camera.main.transform.position = new Vector3(m_Character.position.x, transform.position.y, transform.position.z);
+        //Mathf.Clamp(FOVSize, 4, 6);
+        //if (Input.GetKey(KeyCode.Mouse0))
+        //{
+        //    FOVSize -= Time.deltaTime;
+        //}
+        //else if (Input.GetKeyUp(KeyCode.Mouse0))
+        //{
+        //    //CameraPan(MinOrthoSize, MaxOrthoSize);
+        //    FOVSize = 6;
+        //}
+
+        //m_Vcam.m_Lens.OrthographicSize = FOVSize;
     }
 
 
