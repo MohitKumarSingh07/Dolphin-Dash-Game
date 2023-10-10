@@ -9,7 +9,6 @@ using UnityEngine.SocialPlatforms.Impl;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager instance;
-    public TMP_Text coinText;
     public string levelName;
     public bool reset = false;
     public int startLives = 3;
@@ -20,7 +19,7 @@ public class MenuManager : MonoBehaviour
         {
             instance = this;
         }
-        coinText.text = PlayerPrefManager.GetScore().ToString();
+        //coinText.text = PlayerPrefManager.GetScore().ToString();
         Time.timeScale = 1f;
 
     }

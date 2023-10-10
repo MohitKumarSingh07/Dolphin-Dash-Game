@@ -346,6 +346,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187162111}
   - component: {fileID: 187162112}
+  - component: {fileID: 187162113}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -396,6 +397,22 @@ MonoBehaviour:
   - {fileID: 1414415466283626540}
   - {fileID: 1414415466003072544}
   UIGamePaused: {fileID: 1414415466429695979}
+--- !u!114 &187162113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187162110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde230becd40dbc42a7c8f9e73dd2e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinText: {fileID: 238122571}
+  levelName: Level 1
+  reset: 0
+  startLives: 3
 --- !u!1 &238122568
 GameObject:
   m_ObjectHideFlags: 0
