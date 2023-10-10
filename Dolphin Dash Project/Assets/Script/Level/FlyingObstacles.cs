@@ -18,6 +18,10 @@ public class FlyingObstacles : MonoBehaviour
         }
     }
 
+    private void begin()
+    {
+        StartCoroutine(FlyingObstacle());
+    }
 
     IEnumerator FlyingObstacle()
     {

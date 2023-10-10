@@ -13,19 +13,21 @@ public class ObjectiveMeter : MonoBehaviour
     private float currentPosition;
     [SerializeField] private TextMeshProUGUI CurrentDistanceText;
     [SerializeField] private TextMeshProUGUI TargetDistanceText;
+    public static bool ObjectiveComplete;
 
     private void Start()
     {
         //RedFlag.SetActive(false);
         TargetDistanceText.text = TargetDistance.ToString();
+        ObjectiveComplete = false;
     }
 
     private void Update()
     {
-        //if(ObjectiveSlider.value == 1)
-        //{
-        //    RedFlag.SetActive(true);
-        //}
+        if (ObjectiveSlider.value == 1)
+        {
+            ObjectiveComplete = true;
+        }
 
         currentPosition = GameManager.manager.distance;
 
@@ -35,4 +37,5 @@ public class ObjectiveMeter : MonoBehaviour
     }
 
  
+
 }

@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SEA : MonoBehaviour
 {
     private BuoyancyEffector2D sea;
     //[SerializeField] private bool InWater;
     [SerializeField] private Animator CharAnim;
+    private GameObject dolphin;
 
+    private void Awake()
+    {
+        Time.timeScale = 1;
+        dolphin = CharAnim.gameObject;
+    }
 
     private void Start()
     {
@@ -21,14 +28,12 @@ public class SEA : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0))
         {
             sea.density = 0;
-            sea.linearDrag = 2;
+            sea.linearDrag = 1.5f;
             if (DolphinControl.InWater)
             {
                 DolphinControl.DiveIn = true;
                 DolphinControl.DiveOut = false;
             }
-
-            //DolphinControl.DiveTrigger = true;
 
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -36,30 +41,27 @@ public class SEA : MonoBehaviour
             sea.density = 3;
             DolphinControl.DiveIn = false;
             DolphinControl.DiveOut = true;
+            //if (!DolphinControl.InWater)
+            //{
+            //    DolphinControl.DiveIn = false;
+            //    DolphinControl.DiveOut = false;
+            //}
 
-            //DolphinControl.DiveTrigger = false;
         }
+        //else
+        //{
+        //    DolphinControl.DiveOut = false;
+        //    DolphinControl.DiveIn = false;
+        //}
 
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Dolphin"))
-    //    {
-    //        InWater = true;
-
-    //    }
-    //}
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Dolphin"))
         {
-            //DiveOut = false;
-            //DiveIn = false;
-            //InWater = false;
             this.GetComponentInChildren<BuoyancyEffector2D>().linearDrag = 25;
-            //this.GetComponentInChildren<BuoyancyEffector2D>().density = 5;
         }
     }
 }
