@@ -28,7 +28,7 @@ public class UseShield : MonoBehaviour
     {
         isShielding = true;
         Physics2D.IgnoreLayerCollision(6, 7, true);
-        GameManager.manager.UsePowerUps();
+        //GameManager.manager.UsePowerUps();
         Shield.SetActive(true);
         rend = Shield.GetComponent<SpriteRenderer>();
         yield return new WaitForSeconds(7f);
