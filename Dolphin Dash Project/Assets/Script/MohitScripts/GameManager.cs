@@ -103,13 +103,6 @@ public class GameManager : MonoBehaviour
 
         powerUpsText.text = powerUp.ToString();
     }
-
-	public void UsePowerUps()
-	{
-		powerUp--;
-        powerUpsText.text = powerUp.ToString();
-    }
-
     public void ResetGame() 
 	{
 		lives--;

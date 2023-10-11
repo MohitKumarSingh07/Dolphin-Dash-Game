@@ -1,22 +1,34 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class Loading : MonoBehaviour
 {
-    private Image loadingBar;
+    [SerializeField] private GameObject loobbyPanel;
+    [SerializeField] private GameObject loadingPanel;
+
+    [SerializeField] private Slider loadingSlider;
+    [SerializeField] private TMP_Text sliderValue;
+
+    private int temp;
 
     private void Awake()
     {
-        loadingBar = GetComponent<Image>();
-        loadingBar.fillAmount = 0;
+        loadingPanel.SetActive(true);
+        loadingSlider.value = 0;
     }
 
     private void Update()
     {
-        loadingBar.fillAmount += 0.5f * Time.deltaTime;
+        loadingSlider.value += 10f * Time.deltaTime;
 
-        if(loadingBar.fillAmount >= 1)
+        temp = (int)loadingSlider.value;
+
+        sliderValue.text = "Loading... " + temp + "%";
+
+        if(loadingSlider.value >= 100)
         {
-            MenuManager.instance.LoadButton();
+            loobbyPanel.SetActive(true);
+            loadingPanel.SetActive(false);
         }
     }
 }
