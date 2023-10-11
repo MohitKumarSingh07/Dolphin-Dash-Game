@@ -19,6 +19,7 @@ public class DolphinControl : MonoBehaviour
     public static bool DiveIn;
     public static bool DiveOut;
     public static bool AtBottom;
+    [SerializeField] private bool WaterCheckTemp;
 
     [Header("Dash Settings")]
     [SerializeField] private bool canDash;
@@ -49,26 +50,6 @@ public class DolphinControl : MonoBehaviour
     }
 
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("SeaBottom"))
-    //    {
-    //        DiveIn = false;
-    //        DiveOut = false;
-    //    }
-
-    //}
-
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("SeaBottom"))
-    //    {
-    //        DiveIn = false;
-    //        DiveOut = false;
-    //    }
-    //}
-
     private void Update()
     {
         if (InWaterCheck())
@@ -79,6 +60,8 @@ public class DolphinControl : MonoBehaviour
         {
             InWater = false;
         }
+
+        WaterCheckTemp = InWater;
 
         if (InWater)
         {
@@ -130,6 +113,7 @@ public class DolphinControl : MonoBehaviour
         return raycastHit.collider != null;
 
     }
+
 
 
     private void OnDrawGizmosSelected()
