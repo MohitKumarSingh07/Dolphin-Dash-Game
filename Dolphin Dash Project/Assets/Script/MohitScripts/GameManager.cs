@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         powerUpsText.text = powerUp.ToString();
     }
 
+
     public void ResetGame() 
 	{
 		lives--;
@@ -153,5 +154,4 @@ public class GameManager : MonoBehaviour
 	{
 		SceneManager.LoadScene(levelAfterGameOver);
 	}
-
 }
