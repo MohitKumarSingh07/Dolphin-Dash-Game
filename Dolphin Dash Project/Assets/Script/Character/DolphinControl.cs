@@ -36,6 +36,7 @@ public class DolphinControl : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        m_CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
         particles = GetComponent<ParticleSystem>();
         TrailRend = GetComponent<TrailRenderer>();
@@ -65,7 +66,7 @@ public class DolphinControl : MonoBehaviour
 
         if (InWater)
         {
-            particles.Emit(1);
+            particles.Emit(2);
         }
         else
         {
@@ -109,7 +110,7 @@ public class DolphinControl : MonoBehaviour
 
     public bool InWaterCheck()
     {
-        raycastHit = Physics2D.CapsuleCast(m_CapsuleCollider2D.bounds.center, m_CapsuleCollider2D.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 0.2f, SeaLayer);
+        raycastHit = Physics2D.CapsuleCast(m_CapsuleCollider2D.bounds.center, m_CapsuleCollider2D.size, CapsuleDirection2D.Horizontal, 0, Vector2.down, 1f, SeaLayer);
         return raycastHit.collider != null;
 
     }
