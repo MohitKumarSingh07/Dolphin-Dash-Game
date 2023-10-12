@@ -10,6 +10,11 @@ public class FlyingObstacles : MonoBehaviour
     [SerializeField] private Transform SpawnPoint;
     [SerializeField] private float speed;
 
+    private void Start()
+    {
+        Invoke("begin", 2f);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.B))
@@ -20,7 +25,10 @@ public class FlyingObstacles : MonoBehaviour
 
     private void begin()
     {
+        float RepeatInterval = Random.Range(3, 8);
         StartCoroutine(FlyingObstacle());
+        Debug.Log("Time: " + RepeatInterval);
+        Invoke("begin", RepeatInterval + 6);
     }
 
     IEnumerator FlyingObstacle()

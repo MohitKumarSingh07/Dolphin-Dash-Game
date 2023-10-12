@@ -16638,7 +16638,7 @@ MonoBehaviour:
     m_Right: 400
     m_Top: -150
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_Spacing: 400
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -19622,7 +19622,7 @@ MonoBehaviour:
   m_Content: {fileID: 2736869874899913223}
   m_Horizontal: 1
   m_Vertical: 0
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
