@@ -1,13 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class CoinCollect : MonoBehaviour
 {
     private float speedAfterCollect = 5f;
-    private bool isCollected = false;
+    private bool isCollected;
     private Transform storeLocation;
     [SerializeField] private Vector3 offset;
+
+    private ObjectPool<CoinCollect> _pool;
+
+    private void OnEnable()
+    {
+        isCollected = false;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +24,12 @@ public class CoinCollect : MonoBehaviour
             gameObject.GetComponent<Collider2D>().enabled = false;
             GameManager.manager.AddPoints(1);
             isCollected = true;
-            Destroy(gameObject, 0.7f);
+            StartCoroutine(DeactiveOnCollect(this));
+        }
+
+        if (collision.gameObject.CompareTag("Destroyer"))
+        {
+            _pool.Release(this);
         }
     }
     private void Update()
@@ -34,4 +47,22 @@ public class CoinCollect : MonoBehaviour
             transform.localScale=Vector3.Lerp(transform.localScale,new Vector3(0.2f,0.2f,0),speedAfterCollect * Time.deltaTime);
         }
     }
+
+    IEnumerator DeactiveOnCollect(CoinCollect Coin)
+    {
+        float counter = 0f;
+        while(counter < 1)
+        {
+            counter += Time.deltaTime;
+            yield return null;
+        }
+
+        _pool.Release(Coin);
+    }
+
+    public void SetPool(ObjectPool<CoinCollect> pool)
+    {
+        _pool = pool;
+    }
+
 }

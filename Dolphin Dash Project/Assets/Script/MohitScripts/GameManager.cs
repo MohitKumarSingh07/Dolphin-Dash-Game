@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void ResetGame() 
+    public void ResetGame() // reset Level on damage and Load gameover screen when all lives are lost
 	{
 		lives--;
 

@@ -18,5 +18,10 @@ public class RedCrow : MonoBehaviour
             }
             
         }
+
+        if (collision.gameObject.CompareTag("Destroyer"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

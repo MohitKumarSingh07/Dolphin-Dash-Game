@@ -20,7 +20,7 @@ public class CineMachineBlendControl : MonoBehaviour
 
     private void Update()
     {
-        if((!DolphinControl.InWater) || (DolphinControl.InWater && DolphinObj.transform.position.y < -2.5f))
+        if((!DolphinControl.InWater) || (DolphinControl.InWater && DolphinObj.transform.position.y < -6.5f))
         {
             Zoomed = false;
         }

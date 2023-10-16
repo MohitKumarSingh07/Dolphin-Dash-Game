@@ -30,7 +30,7 @@ public class Breathing : MonoBehaviour
 
     private void OxygenControl()
     {
-        if (DolphinControl.InWater && this.transform.position.y < -2f)
+        if (DolphinControl.InWater && this.transform.position.y < -6.5f)
         {
             CurrentOxygenLevel -= Time.deltaTime * DepletionRate;
         }

@@ -33,6 +33,8 @@ public class DolphinControl : MonoBehaviour
      [Header("Gizmos Param")]
     [SerializeField] private float m_GizmosSphereRadius;
 
+    private Vector2 tempvec2;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,7 +91,7 @@ public class DolphinControl : MonoBehaviour
     {
         rb.velocity = new Vector2(speed, rb.velocity.y);
     }
-    
+
     IEnumerator Dash()
     {
         canDash = false;
